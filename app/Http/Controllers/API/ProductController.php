@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use Validator;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -27,7 +28,27 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'barcode' => 'required|unique:products|max:100',
+            'description' => 'required|max:30',
+            'quantity' => 'required|integer',
+            'price' => 'required|numeric',
+            'discount' => 'required|numeric'
+        ]);
+
+        if ($validator->fails()) {
+            return ['error' => $validator->errors()];
+        } else {
+            $product = Product::create([
+                'barcode' => $request->barcode,
+                'description' => $request->description,
+                'quantity' => $request->quantity,
+                'price' => $request->price,
+                'discount' => $request->discount
+            ]);
+
+            return ['data' => $product];
+        }
     }
 
     /**
@@ -55,7 +76,33 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+
+        if ($product) {
+            $validator = Validator::make($request->all(), [
+                'description' => 'required|max:30',
+                'quantity' => 'required|integer',
+                'price' => 'required|numeric',
+                'discount' => 'required|numeric'
+            ]);
+    
+            if ($validator->fails()) {
+                return ['error' => $validator->errors()];
+            } else {    
+                $product->description = $request->description;
+                $product->quantity = $request->quantity;
+                $product->price = $request->price;
+                $product->discount = $request->discount;
+    
+                $product->save();
+    
+                return ['data' => $product];
+            }
+        } else {
+            return ['error' => [
+                'product' => ['El producto que intenta actualizar no existe']
+            ]];
+        }
     }
 
     /**
