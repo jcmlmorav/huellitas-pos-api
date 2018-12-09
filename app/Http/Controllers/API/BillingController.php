@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Validator;
 use App\Billing;
 use App\Income;
+use App\Product;
 use App\ProductBilling;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -45,17 +46,21 @@ class BillingController extends Controller
                 'products_quantity' => $request->products_quantity
             ]);
 
-            $products = json_decode($request->products);
-
-            foreach ($products as $product) {
+            foreach ($request->products as $product) {
                 $product_billing = ProductBilling::create([
-                    'product_id' => $product->id,
+                    'product_id' => $product['id'],
                     'billing_id' => $billing->id,
-                    'quantity' => $product->quantity,
-                    'price' => $product->price,
-                    'discount' => $product->discount,
-                    'total' => ($product->quantity * $product->price) * ((100 - $product->discount) / 100)
+                    'quantity' => $product['quantity'],
+                    'price' => $product['price'],
+                    'discount' => $product['discount'],
+                    'total' => ($product['quantity'] * $product['price']) * ((100 - $product['discount']) / 100)
                 ]);
+
+                $selected_product = Product::find($product['id']);
+                if($selected_product) {
+                    $selected_product->quantity = $selected_product->quantity - $product['quantity'];
+                    $selected_product->save();
+                }
             }
 
             $income = Income::create([
