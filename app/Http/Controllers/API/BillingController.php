@@ -64,7 +64,7 @@ class BillingController extends Controller
             }
 
             $income = Income::create([
-                'description' => 'Venta número' . $billing->id,
+                'description' => 'Venta número ' . $billing->id,
                 'income_value' => $billing->total
             ]);
 

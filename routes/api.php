@@ -19,3 +19,5 @@ use Illuminate\Http\Request;
 
 Route::apiResource('products', 'API\ProductController');
 Route::apiResource('billings', 'API\BillingController');
+Route::get('sales', 'API\SalesController@index');
+Route::get('sales-resume', 'API\SalesController@resume');
