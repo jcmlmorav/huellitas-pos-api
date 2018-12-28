@@ -20,7 +20,7 @@ class BillingController extends Controller
      */
     public function index()
     {
-        return ['data' => Billing::with('products')->get()];
+        return ['data' => Billing::with('products')->orderBy('created_at', 'DESC')->get()];
     }
 
     /**
@@ -81,6 +81,11 @@ class BillingController extends Controller
     public function show($id)
     {
         return ['data' => Billing::with('products')->find($id)];
+    }
+
+    public function last()
+    {
+        return ['data' => Billing::with('products')->orderBy('created_at', 'DESC')->first()];
     }
 
     /**
