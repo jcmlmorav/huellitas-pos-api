@@ -22,3 +22,7 @@ Route::apiResource('billings', 'API\BillingController');
 Route::get('billings-last', 'API\BillingController@last');
 Route::get('sales', 'API\SalesController@index');
 Route::get('sales-resume', 'API\SalesController@resume');
+Route::apiResource('incomes', 'API\IncomeController');
+Route::apiResource('expenses', 'API\ExpenseController');
+Route::get('incomes-resume', 'API\IncomeController@resume');
+Route::get('expenses-resume', 'API\ExpenseController@resume');

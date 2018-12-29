@@ -148,6 +148,8 @@ return [
 		'description' => 'descripción',
 		'quantity' => 'cantidad',
 		'price' => 'precio',
-		'discount' => 'descuento'
+		'discount' => 'descuento',
+		'income_value' => 'valor',
+		'expense_value' => 'valor'
 	],
 ];
