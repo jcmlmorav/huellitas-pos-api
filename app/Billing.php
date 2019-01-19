@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Billing extends Model
 {
-    protected $fillable = ['client_document', 'total', 'products_quantity'];
+    protected $fillable = ['client_document', 'total', 'products_quantity', 'money', 'change'];
 
     public function products()
     {

@@ -43,7 +43,9 @@ class BillingController extends Controller
             $billing = Billing::create([
                 'client_document' => $request->client_document,
                 'total' => $request->total,
-                'products_quantity' => $request->products_quantity
+                'products_quantity' => $request->products_quantity,
+                'money' => $request->money,
+                'change' => $request->change
             ]);
 
             foreach ($request->products as $product) {

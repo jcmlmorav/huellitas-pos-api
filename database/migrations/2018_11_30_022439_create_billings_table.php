@@ -18,6 +18,8 @@ class CreateBillingsTable extends Migration
             $table->string('client_document')->nullable();
             $table->double('total', 8, 2);
             $table->integer('products_quantity');
+            $table->double('money', 8, 2);
+            $table->double('change', 8, 2);
             $table->timestamps();
         });
     }
