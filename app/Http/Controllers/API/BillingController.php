@@ -49,8 +49,10 @@ class BillingController extends Controller
             ]);
 
             foreach ($request->products as $product) {
+                $query = Product::where('barcode', $product['barcode'])->first();
+
                 $product_billing = ProductBilling::create([
-                    'product_id' => $product['id'],
+                    'product_id' => $query->id,
                     'billing_id' => $billing->id,
                     'quantity' => $product['quantity'],
                     'price' => $product['price'],
@@ -58,7 +60,7 @@ class BillingController extends Controller
                     'total' => ($product['quantity'] * $product['price']) * ((100 - $product['discount']) / 100)
                 ]);
 
-                $selected_product = Product::find($product['id']);
+                $selected_product = Product::find($query->id);
                 if($selected_product) {
                     $selected_product->quantity = $selected_product->quantity - $product['quantity'];
                     $selected_product->save();
