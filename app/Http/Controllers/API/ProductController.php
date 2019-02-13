@@ -30,7 +30,7 @@ class ProductController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'barcode' => 'required|unique:products|max:100',
-            'description' => 'required|max:30',
+            'description' => 'required|max:40',
             'quantity' => 'required|integer',
             'price' => 'required|numeric',
             'discount' => 'required|numeric'
