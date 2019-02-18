@@ -80,7 +80,7 @@ class ProductController extends Controller
 
         if ($product) {
             $validator = Validator::make($request->all(), [
-                'description' => 'required|max:30',
+                'description' => 'required|max:40',
                 'quantity' => 'required|integer',
                 'price' => 'required|numeric',
                 'discount' => 'required|numeric'
