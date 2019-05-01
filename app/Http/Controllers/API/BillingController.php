@@ -20,7 +20,7 @@ class BillingController extends Controller
      */
     public function index()
     {
-        return ['data' => Billing::with('products')->orderBy('created_at', 'DESC')->get()];
+        return ['data' => Billing::with('products')->orderBy('created_at', 'DESC')->take(100)->get()];
     }
 
     /**

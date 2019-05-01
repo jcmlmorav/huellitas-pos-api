@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Validator;
 use App\Income;
+use App\Billing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -46,7 +47,7 @@ class IncomeController extends Controller
 
     public function resume()
     {
-        return ['data' => Income::sum('income_value')];
+        return ['data' => Billing::sum('total')];
     }
 
     /**
