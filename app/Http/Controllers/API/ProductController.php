@@ -63,7 +63,12 @@ class ProductController extends Controller
         if($product) {
             return ['data' => $product];
         } else {
-            return ['data' => Product::where('description', 'like', '%'.$id.'%')->get()];
+            $product = Product::where('description', 'like', '%'.$id.'%')->get();
+            if($product->count() > 0) {
+                return ['data' => $product];
+            } else {
+                return ['data' => Product::where('price', $id)->get()];
+            }
         }
     }
 
