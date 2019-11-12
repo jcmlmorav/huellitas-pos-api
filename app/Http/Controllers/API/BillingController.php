@@ -44,6 +44,8 @@ class BillingController extends Controller
                 'client_document' => $request->client_document,
                 'total' => $request->total,
                 'products_quantity' => $request->products_quantity,
+                'coupon' => $request->coupon,
+                'coupon_discount' => $request->coupon_discount,
                 'money' => $request->money,
                 'change' => $request->change
             ]);
