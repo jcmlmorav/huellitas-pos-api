@@ -33,7 +33,8 @@ class ProductController extends Controller
             'description' => 'required|max:40',
             'quantity' => 'required|integer',
             'price' => 'required|numeric',
-            'discount' => 'required|numeric'
+            'discount' => 'required|numeric',
+            'active' => 'required|boolean'
         ]);
 
         if ($validator->fails()) {
@@ -44,7 +45,8 @@ class ProductController extends Controller
                 'description' => $request->description,
                 'quantity' => $request->quantity,
                 'price' => $request->price,
-                'discount' => $request->discount
+                'discount' => $request->discount,
+                'active' => $request->active
             ]);
 
             return ['data' => $product];
@@ -88,7 +90,8 @@ class ProductController extends Controller
                 'description' => 'required|max:40',
                 'quantity' => 'required|integer',
                 'price' => 'required|numeric',
-                'discount' => 'required|numeric'
+                'discount' => 'required|numeric',
+                'active' => 'required|boolean'
             ]);
     
             if ($validator->fails()) {
@@ -98,6 +101,7 @@ class ProductController extends Controller
                 $product->quantity = $request->quantity;
                 $product->price = $request->price;
                 $product->discount = $request->discount;
+                $product->active = $request->active;
     
                 $product->save();
     
